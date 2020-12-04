@@ -17,10 +17,15 @@ var App = {
 
   },
 
-  fetch: function(callback = ()=>{}) {
+  fetch: function(callback = () => {}) {
     Parse.readAll((data) => {
+      Messages = data.results;
+      MessagesView.render();
+      Rooms = _.uniq(_.pluck(data.results, 'roomname'));
+      // Rooms = _.pluck(data.results, roomname)
+
       // examine the response from the server request:
-      console.log(data);
+      console.log(data, Rooms);
 
       callback();
     });

@@ -7,6 +7,9 @@ var RoomsView = {
   },
 
   render: function() {
+    _.each(Rooms, (room) => {
+      RoomsView.$select.append('<select><%= room %></select>');
+    });
   }
 
 };
