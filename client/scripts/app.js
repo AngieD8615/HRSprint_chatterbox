@@ -20,8 +20,13 @@ var App = {
   fetch: function(callback = ()=>{}) {
     Parse.readAll((data) => {
       // examine the response from the server request:
-      console.log(data);
-
+      MessagesView.renderMessages(data.results);
+      let roomList = _.filter(
+        _.uniq(
+          _.pluck(data.results, 'roomname')
+        ), (roomname) => { return roomname.length > 0; }
+      );
+      roomList.forEach((room) => RoomsView.renderRoom(room));
       callback();
     });
   },
