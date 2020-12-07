@@ -3,7 +3,7 @@ var RoomsView = {
   $select: $("#rooms select"),
 
   initialize: function () {
-    RoomsView.$button.on('submit', RoomsView.handleAddRoom);
+    $("#rooms select").change(RoomsView.onChange);
   },
 
   renderRoom: function (room) {
@@ -13,12 +13,14 @@ var RoomsView = {
   render: function (room) {
     let roomname = {roomname: room};
     var template = _.template(`
-      <option class="room"><%- roomname %></option>
+      <option class="room" value="<%- roomname %>"><%- roomname %></option>
     `);
     return template(roomname);
   },
 
-  handleAddRoom: function () {
-    console.log('clicked');
+  onChange: function (event) {
+    console.log("changed", event.target.value);
+    MessagesView.renderMessages(_.filter(Messages.messages, (message) => message.roomname === event.target.value));
   }
+
 };

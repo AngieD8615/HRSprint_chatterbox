@@ -15,7 +15,8 @@ var FormView = {
       text: FormView.$form.find('#message').val(),
       username: App.username,
     };
-    Parse.create(message, () => {
+    Parse.create(message, (data) => {
+      console.log(data);
       $("#chats").prepend(MessageView.render(message));
       FormView.$form.find('#message').val("");
     });

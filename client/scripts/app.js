@@ -20,7 +20,8 @@ var App = {
   fetch: function(callback = ()=>{}) {
     Parse.readAll((data) => {
       // examine the response from the server request:
-      MessagesView.renderMessages(data.results);
+      Messages.messages = data.results;
+      MessagesView.renderMessages(Messages.messages);
       let roomList = _.filter(
         _.uniq(
           _.pluck(data.results, 'roomname')

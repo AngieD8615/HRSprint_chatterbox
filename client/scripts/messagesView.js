@@ -1,15 +1,17 @@
 var MessagesView = {
   $chats: $("#chats"),
 
-  initialize: function () {},
+  initialize: function () {
+
+  },
 
   renderMessages: function (messages) {
     messages.forEach((message) => {
-      MessagesView.renderMessage(message);
-    });
-  },
 
-  renderMessage: function (message) {
-    $("#chats").append(MessageView.render(message));
+      console.log(message);
+      var $message = MessageView.render(message);
+
+      $("#chats").append($message);
+    });
   },
 };
